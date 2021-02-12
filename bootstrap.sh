@@ -1,18 +1,17 @@
-#!/usr/bin/bash
-
-#cd "$(dirname "${BASH_SOURCE}")";
+#!/usr/bin/env bash
 
 git pull origin main;
 
 function doIt() {
-	rsync --exclude ".git/" \
-		--exclude ".DS_Store" \
-		--exclude ".osx" \
+
+	rsync --exclude ".DS_Store" \
 		--exclude "bootstrap.sh" \
-		--exclude "README.md" \
-		--exclude "LICENSE-MIT.txt" \
-		-avh --no-perms . ~;
+		-avh --no-perms ./files/ ~;
 	source ~/.bash_profile;
+
+    for i in $(find ./*/ -type f -name '*.sh')
+        do sh "$i"
+    done
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then

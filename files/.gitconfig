@@ -1,0 +1,48 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Amadeu de Martos
+	email = amadeureal@hotmail.com
+	
+[alias]
+	mr = "!f() { git fetch ${2-origin} merge-requests/$1/head:mr/$1;git checkout mr/$1; }; f"
+    fix = "!f() { git add . && git commit --amend --no-edit; }; f"
+    sync = "!f() { git pull -- ${1-origin} `git which`; }; f"
+    which = "!f() { git branch | grep \\* | cut -d ' ' -f2; }; f"
+    root = rev-parse --show-toplevel
+    create = "!f() { git checkout -b $1; git push -u ${2-origin} $1; }; f"
+    rb = "!f() { git fetch ${2-origin}; git rebase ${2-origin}/$1; }; f"
+    lg = "!f() { git log --graph --oneline --decorate --all; }; f" 
+
+[checkout]
+	defaultRemote = origin
+
+[pull]
+	rebase = true
+
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+
+[color]
+	ui = true
+	interactive = true
+	branch = true
+	status = true
+
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[credential]
+	helper = osxkeychain
